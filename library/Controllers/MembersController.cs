@@ -31,11 +31,35 @@ public class MembersController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Member member)
     {
-        if (!ModelState.IsValid) // a required field was left empty
+        if (!ModelState.IsValid)
         {
             return View(member);
         }
         await _members.AddAsync(member);
+        return RedirectToAction(nameof(Index));
+    }
+
+    // GET /Members/Edit/5: the form, filled with member 5.
+    public async Task<IActionResult> Edit(long id)
+    {
+        var member = await _members.GetByIdAsync(id);
+        if (member == null)
+        {
+            return NotFound();
+        }
+        return View(member);
+    }
+
+    // POST /Members/Edit/5: the changed form was submitted.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(Member member)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(member);
+        }
+        await _members.UpdateAsync(member);
         return RedirectToAction(nameof(Index));
     }
 
