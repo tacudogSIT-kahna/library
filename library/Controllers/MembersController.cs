@@ -13,10 +13,30 @@ public class MembersController : Controller
         _members = members;
     }
 
-    // GET /Members the list of members.
+    // GET /Members
     public async Task<IActionResult> Index()
     {
         var members = await _members.GetAllAsync();
         return View(members);
     }
+
+    // GET /Members/Create an empty form.
+    public IActionResult Create()
+    {
+        return View(new Member());
+    }
+
+    // POST /Members/Create the form was submitted.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(Member member)
+    {
+        if (!ModelState.IsValid) // a required field was left empty
+        {
+            return View(member);
+        }
+        await _members.AddAsync(member);
+        return RedirectToAction(nameof(Index));
+    }
+
 }
