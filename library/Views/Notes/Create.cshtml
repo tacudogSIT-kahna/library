@@ -1,0 +1,28 @@
+﻿@model Note
+@{
+    ViewData["Title"] = "New Note";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 38rem; border-top: 5px solid #0096C7 !important;">
+        <div class="card-body p-4">
+            <h2 class="h4 fw-bold text-dark mb-3">Add Library Note</h2>
+            <form asp-action="Create" method="post">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-semibold text-secondary small">Note Title</label>
+                    <input asp-for="Title" class="form-control" placeholder="Enter brief summary heading" />
+                    <span asp-validation-for="Title" class="text-danger small"></span>
+                </div>
+                <div class="mb-4">
+                    <label asp-for="Body" class="form-label fw-semibold text-secondary small">Details / Message Body</label>
+                    <textarea asp-for="Body" class="form-control" rows="4" placeholder="Enter note details (optional)"></textarea>
+                    <span asp-validation-for="Body" class="text-danger small"></span>
+                </div>
+                <div class="d-flex align-items-center justify-content-end gap-2 border-top pt-3">
+                    <a asp-action="Index" class="btn btn-link link-secondary fw-semibold text-decoration-none px-3">Cancel</a>
+                    <button type="submit" class="btn text-white px-4 fw-semibold shadow-sm" style="background-color: #0096C7;">Save Note</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
