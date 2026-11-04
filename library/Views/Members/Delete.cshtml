@@ -17,6 +17,11 @@
                 </div>
             </div>
 
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+
             <div class="bg-light rounded-3 p-3 mb-4 border border-light">
                 <div class="row g-2">
                     <div class="col-4 fw-semibold text-secondary small">Registry ID</div>
