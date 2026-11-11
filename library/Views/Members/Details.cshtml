@@ -3,13 +3,22 @@
     ViewData["Title"] = Model.Member.FullName;
 }
 
-<h1 class="mb-1">@Model.Member.FullName</h1>
-<p class="text-muted">@Model.Member.MemberType · @(Model.Member.Email ?? "no email")</p>
+<div class="p-4 mb-4 text-white rounded-3" style="background-color: #2F4A3A;">
+    <div class="d-flex align-items-center gap-3">
+        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold fs-4" style="background-color: #F7F0E3; color: #2F4A3A; width: 56px; height: 56px; min-width: 56px;">
+            @Model.Member.FullName.Substring(0, 1).ToUpper()
+        </div>
+        <div>
+            <h1 class="display-6 fw-bold mb-0 text-white">@Model.Member.FullName</h1>
+            <p class="mb-0" style="color: #D8E3D0;">@Model.Member.MemberType · @(Model.Member.Email ?? "no email")</p>
+        </div>
+    </div>
+</div>
 
 <h2 class="h5 mt-4">Loans</h2>
 @if (Model.Loans.Count == 0)
 {
-    <p>This member has never borrowed a book.</p>
+    <p class="text-muted">This member has never borrowed a book.</p>
 }
 else
 {
@@ -26,10 +35,10 @@ else
             @foreach (var loan in Model.Loans)
             {
                 <tr>
-                    <td>@loan.BookTitle</td>
+                    <td class="fw-semibold">@loan.BookTitle</td>
                     <td>@(loan.LoanedOn.ToString("yyyy-MM-dd"))</td>
                     <td>@(loan.ReturnedOn?.ToString("yyyy-MM-dd") ?? "—")</td>
-                    <td>@loan.Status</td>
+                    <td><span class="badge @(loan.Status == "Overdue" ? "text-bg-danger" : loan.Status == "Out" ? "text-bg-warning" : "text-bg-secondary")">@loan.Status</span></td>
                 </tr>
             }
         </tbody>

@@ -3,35 +3,35 @@
     ViewData["Title"] = "Notepad";
 }
 
-<div class="p-4 mb-4 text-white rounded-3 shadow-sm" style="background-color: #0096C7;">
+<div class="p-4 mb-4 text-white rounded-3" style="background-color: #2F4A3A;">
     <div class="d-flex justify-content-between align-items-center">
         <div>
-            <h1 class="display-6 fw-bold mb-0">Staff Notepad</h1>
-            <p class="mb-0 opacity-75">Currently tracking @Model.Count internal operation logs</p>
+            <h1 class="display-6 fw-bold mb-0 text-white">Staff Notepad</h1>
+            <p class="mb-0" style="color: #D8E3D0;">Currently tracking @Model.Count internal operation logs</p>
         </div>
-        <a asp-action="Create" class="btn btn-light fw-semibold shadow-sm" style="color: #0096C7;">+ New Note</a>
+        <a asp-action="Create" class="btn btn-primary fw-semibold">+ New Note</a>
     </div>
 </div>
 
-<div class="card shadow-sm border-0">
+<div class="card border-0">
     <div class="list-group list-group-flush">
         @foreach (var note in Model)
         {
-            <div class="list-group-item p-3 border-start" style="border-left: 5px solid #0096C7 !important;">
+            <div class="list-group-item p-3 border-start" style="border-left: 5px solid #D9A441 !important; background-color: #FFFBF3;">
                 <div class="d-flex w-100 justify-content-between align-items-center flex-wrap gap-2">
                     <div class="d-flex align-items-center gap-3">
                         <div style="width: 3.5rem; flex-shrink: 0;">
-                            <span class="badge rounded-pill bg-light text-dark border text-center shadow-sm w-100">#@note.NoteId</span>
+                            <span class="badge rounded-pill fw-bold text-center w-100" style="background-color: #EADFC9; color: #5A4434;">#@note.NoteId</span>
                         </div>
                         <div>
-                            <h5 class="mb-1 fw-bold text-dark">@note.Title</h5>
-                            <p class="mb-1 text-secondary small">@(note.Body ?? "—")</p>
+                            <h5 class="mb-1 fw-bold">@note.Title</h5>
+                            <p class="mb-1 small" style="color: #5A4434;">@(note.Body ?? "—")</p>
                             <small class="text-muted">Logged on: @note.CreatedOn.ToString("MMMM dd, yyyy")</small>
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <a asp-action="Edit" asp-route-id="@note.NoteId" class="btn btn-sm btn-outline-secondary fw-semibold">✏️ Edit</a>
-                        <a asp-action="Delete" asp-route-id="@note.NoteId" class="btn btn-sm btn-outline-danger">🗑️ Delete</a>
+                        <a asp-action="Edit" asp-route-id="@note.NoteId" class="btn btn-sm btn-outline-secondary fw-semibold">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@note.NoteId" class="btn btn-sm btn-outline-danger">Delete</a>
                     </div>
                 </div>
             </div>
